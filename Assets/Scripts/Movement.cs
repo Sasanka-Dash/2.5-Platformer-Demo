@@ -7,32 +7,36 @@ public class Movement : MonoBehaviour
     public float speed = 30f; // Speed of movement
     public int CoinCollected;
     public AudioClip CoinCollectSound;
+    public bool isMovingUp = false;
+    public bool isMovingDown = false;
+    public bool isMovingLeft = false;
+    public bool isMovingRight = false;
 
     // Update is called once per frame
     void Update()
     {
         // Move left when 'A' is pressed
-        if (Input.GetKey(KeyCode.A))
+        if (isMovingLeft)
         {
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
+            Left();
         }
 
         // Move right when 'D' is pressed
-        if (Input.GetKey(KeyCode.D))
+        if (isMovingRight)
         {
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
+            Right();
         }
 
         // Move up when 'W' is pressed
-        if (Input.GetKey(KeyCode.W))
+        if (isMovingUp)
         {
-            transform.Translate(Vector3.up * speed * Time.deltaTime);
+            Up();
         }
 
         // Move down when 'S' is pressed
-        if (Input.GetKey(KeyCode.S))
+        if (isMovingDown)
         {
-            transform.Translate(Vector3.down * speed * Time.deltaTime);
+            Down();
         }
 
         // Rotate left when 'Q' is pressed
@@ -46,7 +50,48 @@ public class Movement : MonoBehaviour
         {
             transform.Rotate(Vector3.up, speed * Time.deltaTime);
         }
-   }   
+   }
+
+   public void TriggerUp(bool canMove)
+   {
+    isMovingUp = canMove;
+   }
+
+   public void TriggerDown(bool canMove)
+   {
+    isMovingDown = canMove;
+   }
+
+   public void TriggerLeft(bool canMove)
+   {
+    isMovingLeft = canMove;
+   }
+
+   public void TriggerRight(bool canMove)
+   {
+    isMovingRight = canMove;
+   }
+
+   public void Up()
+   {
+    transform.Translate(Vector3.up * speed * Time.deltaTime);
+   }
+
+   public void Down()
+   {
+    transform.Translate(Vector3.down * speed * Time.deltaTime);
+   }
+
+   public void Left()
+   {
+    transform.Translate(Vector3.left * speed * Time.deltaTime);
+   }
+
+   public void Right()
+   {
+    transform.Translate(Vector3.right * speed * Time.deltaTime);
+   }
+
    // This method is called when a Collider enters this GameObject's collider.
     private void OnCollisionEnter(Collision collision)
     {

@@ -5,8 +5,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float speed = 30f; // Speed of movement
-    public int CoinCollected;
-    public AudioClip CoinCollectSound;
+    
+    
     public bool isMovingUp = false;
     public bool isMovingDown = false;
     public bool isMovingLeft = false;
@@ -114,11 +114,11 @@ public class Movement : MonoBehaviour
 
         if(other.gameObject.tag == "Coin")
         {
-            CoinCollected++;
+            GameManager.Instance.CoinCollect();
             //CoinCollected = CoinCollected + 1;
             //CoinCollected += 1;
 
-            AudioSource.PlayClipAtPoint(CoinCollectSound, transform.position);
+            SoundManager.Instance.CoinSound();
             
             Destroy(other.gameObject);
         }
